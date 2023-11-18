@@ -211,8 +211,9 @@ function createProject() {
         }
 
     }).then((response) => {
-        console.log(response)
-        alert("your location id is " + response);
+        response.json().then((data) => {
+            alert("your location id is " + data);
+        })
         document.getElementById("mainframe").style.display = "none";
         document.getElementById("viewer").style.display = "";
 
@@ -265,24 +266,32 @@ function getNodesInit() {
                 if(currentNode&&currentNode.north!==""){
                     currentNode=arr.find(e=>e.id==currentNode.north);
                     handleImageSelectionView();
+                }else{
+                    showAlert()
                 }
             })
             document.getElementById("btn-east").addEventListener("click",()=>{
                 if(currentNode&&currentNode.east!==""){
                     currentNode=arr.find(e=>e.id==currentNode.east);
                     handleImageSelectionView();
+                }else{
+                    showAlert()
                 }
             })
             document.getElementById("btn-west").addEventListener("click",()=>{
                 if(currentNode&&currentNode.west!==""){
                     currentNode=arr.find(e=>e.id==currentNode.west);
                     handleImageSelectionView();
+                }else{
+                    showAlert()
                 }
             })
             document.getElementById("btn-south").addEventListener("click",()=>{
                 if(currentNode&&currentNode.south!==""){
                     currentNode=arr.find(e=>e.id==currentNode.south);
                     handleImageSelectionView();
+                }else{
+                    showAlert()
                 }
             })
             document.getElementById("inputG").remove()
@@ -291,6 +300,10 @@ function getNodesInit() {
         })
     }).catch(err => console.log(err));
     
+}
+
+function showAlert(){
+    alert("This direction isnt available")
 }
 
 function displayNode(){
